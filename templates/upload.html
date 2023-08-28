@@ -1,13 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>PDF Upload</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Upload and Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .icon {
+            font-size: 50px;
+            margin: 0 20px;
+            color: #007bff;
+        }
+
+        .description {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .notice {
+            color: #ff6600;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>PDF Upload</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="pdf_file">
-        <input type="submit" value="Upload">
-    </form>
+    <div class="container">
+        <h1 id="en-title" style="display: none;">PDF to Excel Conversion</h1>
+        <h1 id="jp-title">PDFをExcelへ変換</h1>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="pdf_file">
+            <input type="submit" value="アップロードして変換" id="submit-button">
+        </form>
+        <div class="icon-container">
+            <div class="icon">📄</div>
+            <div class="icon">➡️</div>
+            <div class="icon">📊</div>
+        </div>
+        <p class="description" id="en-description" style="display: none;">
+            Upload a PDF file, convert it to Excel,
+            and transform your data with ease!
+        </p>
+        <p class="description" id="jp-description">
+            PDFファイルをアップロードし、Excelに変換して<br/>
+            データを簡単に加工しましょう！
+        </p>
+        <p class="notice" id="en-notice" style="display: none;">
+            Please note: The conversion process may take some time. Please wait until the download of the converted Excel file begins.
+        </p>
+        <p class="notice" id="jp-notice">
+            注意：変換処理に時間がかかることがあります。<br/>
+            変換したExcelファイルのダウンロードが始まるまで<br/>お待ちください。
+        </p>
+        <button onclick="toggleLanguage()">Change Language</button>
+    </div>
+    <script>
+        function toggleLanguage() {
+            const enTitle = document.getElementById('en-title');
+            const jpTitle = document.getElementById('jp-title');
+            const enDescription = document.getElementById('en-description');
+            const jpDescription = document.getElementById('jp-description');
+            const enNotice = document.getElementById('en-notice');
+            const jpNotice = document.getElementById('jp-notice');
+            const submitButton = document.getElementById('submit-button');
+
+            if (enDescription.style.display === 'none') {
+                enDescription.style.display = 'block';
+                jpDescription.style.display = 'none';
+                enNotice.style.display = 'block';
+                jpNotice.style.display = 'none';
+                enTitle.style.display = 'block';
+                jpTitle.style.display = 'none';
+                submitButton.value = 'Upload and Convert';
+            } else {
+                enDescription.style.display = 'none';
+                jpDescription.style.display = 'block';
+                enNotice.style.display = 'none';
+                jpNotice.style.display = 'block';
+                enTitle.style.display = 'none';
+                jpTitle.style.display = 'block';
+                submitButton.value = 'アップロードして変換';
+            }
+        }
+    </script>
 </body>
 </html>
